@@ -7,9 +7,9 @@ pboptions(type="timer")
 
 # setwd(".../Data/DanHPAIwild params/")
 # 
-stopifnot(file.exists("DanHPAIwild parameters_RF.RData"))
+stopifnot(file.exists("...Data/DanHPAIwild parameters_RF.RData"))
 
-load("DanHPAIwild parameters_RF.RData")
+load("...Data/DanHPAIwild parameters_RF.RData")
 N_Env <- N_Env/10^9
 ID50 <- lapply(ID50, function(x) x*10)
 sigma <- sigma

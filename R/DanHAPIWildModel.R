@@ -352,16 +352,9 @@ DanHPAIwildModel <- function(passur, V_M, ID50, S_list_A, dD_list_A, V_disp_A, d
     Disp_V <- V_disp_A[,,1]+V_disp_A[,,2]+V_disp_A[,,3]+V_disp_A[,,4]+V_disp_A[,,5]
 
     #Sum up all V shedded by 5 species to obtain V and decayed in the env
-    V_M[, j+1] <- ##V_M[, j+1] +
-      V_M[, j] * exp(-sigma[j+1]) +
+    V_M[, j+1] <- V_M[, j] * exp(-sigma[j+1]) +
       ((1-foraging[[1]])*eta[[1]]*I_list_A[, j+1, 1] + (1-foraging[[2]])*eta[[2]]*I_list_A[, j+1, 2] + (1-foraging[[3]])*eta[[3]]*I_list_A[, j+1, 3] + (1-foraging[[4]])*eta[[4]]*I_list_A[, j+1, 4] + (1-foraging[[5]])*eta[[5]]*I_list_A[, j+1, 5] + Disp_V[, j+1]) * exp(-sigma[j+1]) +
       (epsilon[[1]]*D_list_A[, j+1, 1] * exp(-mu[[1]]) + epsilon[[2]]*D_list_A[, j+1, 2] * exp(-mu[[2]]) + epsilon[[3]]*D_list_A[, j+1, 3] * exp(-mu[[3]]) + epsilon[[4]]*D_list_A[, j+1, 4] * exp(-mu[[4]]) + epsilon[[5]]*D_list_A[, j+1, 5] * exp(-mu[[5]]))*exp(-sigma[j+1]) 
-    # -
-    #   (S_list_A[,j+1,1]+I_list_A[,j+1,1]+Rec_list_A[,j+1,1])*contact[[1]](j+1)*if_else(is.infinite(V_M[, j]/(N_Env*xi)) | is.na(V_M[, j]/(N_Env*xi)), 0, V_M[, j]/(N_Env*xi)) -
-    #   (S_list_A[,j+1,2]+I_list_A[,j+1,2]+Rec_list_A[,j+1,2])*contact[[2]](j+1)*if_else(is.infinite(V_M[, j]/(N_Env*xi)) | is.na(V_M[, j]/(N_Env*xi)), 0, V_M[, j]/(N_Env*xi)) -
-    #   (S_list_A[,j+1,3]+I_list_A[,j+1,3]+Rec_list_A[,j+1,3])*contact[[3]](j+1)*if_else(is.infinite(V_M[, j]/(N_Env*xi)) | is.na(V_M[, j]/(N_Env*xi)), 0, V_M[, j]/(N_Env*xi)) -
-    #   (S_list_A[,j+1,4]+I_list_A[,j+1,4]+Rec_list_A[,j+1,4])*contact[[4]](j+1)*if_else(is.infinite(V_M[, j]/(N_Env*xi)) | is.na(V_M[, j]/(N_Env*xi)), 0, V_M[, j]/(N_Env*xi)) -
-    #   (S_list_A[,j+1,5]+I_list_A[,j+1,5]+Rec_list_A[,j+1,5])*contact[[5]](j+1)*if_else(is.infinite(V_M[, j]/(N_Env*xi)) | is.na(V_M[, j]/(N_Env*xi)), 0, V_M[, j]/(N_Env*xi))
   }
 
   return(list(half=half, ninetysix=ninetysix, theta_A=theta_A, S_list_A=S_list_A, I_list_A=I_list_A, Rec_list_A=Rec_list_A, dRec_list_A=dRec_list_A, D_list_A=D_list_A, dD_list_A=dD_list_A, prob_A=prob_A, V_M=V_M))
