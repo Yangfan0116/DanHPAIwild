@@ -1,9 +1,12 @@
 #' Designated long-distance bird migration pattern per species per cell per week
 #'
-#' @param i species
-#' @param j week
+#' @param i 
+#' @param j 
 #'
+#' @return
 #' @export
+#'
+#' @examples
 is_migration_A <- function(i,j){ #Bird turnover category I
   tp1 <- c(1:4,11:23,30:52)
   tp2 <- c(13:25,37:50)

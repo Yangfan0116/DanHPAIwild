@@ -5,11 +5,11 @@ library("pbapply")
 library("dplyr")
 pboptions(type="timer")
 
-# setwd(".../Data/DanHPAIwild params/")
-# 
-stopifnot(file.exists("...Data/DanHPAIwild parameters_RF.RData"))
+# setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
 
-load("...Data/DanHPAIwild parameters_RF.RData")
+stopifnot(file.exists("Data/DanHPAIwild parameters_RF.RData"))
+
+load("Data/DanHPAIwild parameters_RF.RData")
 N_Env <- N_Env/10^9
 ID50 <- lapply(ID50, function(x) x*10)
 sigma <- sigma
@@ -47,7 +47,7 @@ if(cores > 1L){
 }
 
 session <- sessionInfo()
-save(results, session, file = "output.rda")
+save(results, session, file = "RF_Baseline_output.rda")
 
 Sys.time()
 session

@@ -1,30 +1,33 @@
-#' Simulation model for the HPAI transmission through environmental contamination (vectorised version, for speed)
+#' Simulation model for the HPAIV transmission through bird migration and environmental contamination 
 #'
-#' @param passur The passive surveillance data set by species in an epidemiological year starting from October
-#' @param V_M A matrix for recording environmental viral load per cell per week
-#' @param disp_prob_L A list for recording the probability of dispersal to cells by species for each pair of cells
-#' @param ID50 Median infection dose per species
-#' @param S_list_A A array for recording cumulative susceptible birds by species per cell per week
-#' @param dD_list_A A array for recording dead birds by species per cell per week
-#' @param V_disp_A A array for recording viral sheds by species per cell per week while dispersing
-#' @param gamma Rate of leaving the infectious state per species
-#' @param Rec_list_A A array for recording cumulative recovered birds by species per cell per week
-#' @param dRec_list_A A array for recording recovered birds by species per cell per week
-#' @param mf Case fatality rate per species
-#' @param theta_A_list A list for providing bird counts changes by species per cell per week
-#' @param sigma Viral decay rate in the environment per week
-#' @param I_list_A A array for recording cumulative infectious birds by species per cell per week
-#' @param epsilon Contamination rate of an intact dead bird per species
-#' @param eta Virus shedding rate of an infectious bird per species
-#' @param mu Decay rate of dead birds in the environment
-#' @param D_list_A A array for recording cumulative dead birds by species per cell per week
-#' @param prob_A A array for recording the probability of infection by species per cell per week
-#' @param N_Env The baseline environmental dilution factor
-#' @param contact Contact rate functions per species depending on the week number
-#' @param xi The proportion of the cell occupied the water area per cell
-#' @param foraging The proportion of time spent on foraging per species
+#' @param passur 
+#' @param V_M 
+#' @param ID50 
+#' @param S_list_A 
+#' @param dD_list_A 
+#' @param V_disp_A 
+#' @param disp_prob_L 
+#' @param gamma 
+#' @param Rec_list_A 
+#' @param dRec_list_A 
+#' @param mf 
+#' @param theta_A_list 
+#' @param sigma 
+#' @param I_list_A 
+#' @param epsilon 
+#' @param eta 
+#' @param mu 
+#' @param D_list_A 
+#' @param prob_A 
+#' @param N_Env 
+#' @param contact 
+#' @param xi 
+#' @param foraging 
 #'
+#' @return
 #' @export
+#'
+#' @examples
 DanHPAIwildModel <- function(passur, V_M, ID50, S_list_A, dD_list_A, V_disp_A, disp_prob_L, gamma, Rec_list_A, dRec_list_A, mf, theta_A_list, sigma, I_list_A, epsilon, eta, mu, D_list_A, prob_A, N_Env, contact, xi, foraging){
 
   # set.seed(1)
@@ -59,14 +62,12 @@ DanHPAIwildModel <- function(passur, V_M, ID50, S_list_A, dD_list_A, V_disp_A, d
       k <- seq_len(n_cells)
       
       ################
-      #Movement------: turnover has only susceptibles, newly arrivals follow PS:PI:PR
+      #Movement
       ################
-      # print(i);print(k);print(j)
-      
+
       #replace removed birds of the last time step with newly arrived birds
       theta_A[k, j+1, i] <- theta_A[k, j+1, i] + dD_list_A[k, j, i]
       
-      ### START OPTIMISED CODE:
       if (is_migration_A(i,j)){
         
         k <- which(theta_A[, j+1, i] < 0)
@@ -80,7 +81,6 @@ DanHPAIwildModel <- function(passur, V_M, ID50, S_list_A, dD_list_A, V_disp_A, d
         
         k <- which(theta_A[, j+1, i] > 0)
         
-        ## You re-use this code in a few places, but remember DRY - do not repeat yourself...
         P_S <-  sum(S_list_A[,j,i])/sum(S_list_A[,j,i]+I_list_A[,j,i]+Rec_list_A[,j,i])
         P_I <- sum(I_list_A[,j,i])/sum(S_list_A[,j,i]+I_list_A[,j,i]+Rec_list_A[,j,i])+probability[j+1,i]
         P_Rec <- sum(Rec_list_A[,j,i])/sum(S_list_A[,j,i]+I_list_A[,j,i]+Rec_list_A[,j,i])
@@ -338,16 +338,14 @@ DanHPAIwildModel <- function(passur, V_M, ID50, S_list_A, dD_list_A, V_disp_A, d
       ################
       #Dispersion------
       ################
-      # using dweibull to integrate and obtain dis_prob for i_th species of k_th cell at j+1_th time step (extra land border cells were taken into account)
-      # random assign the number of I bird dispersal to neighboring cells
-
-
+      
       trail <- I_list_A[k, j+1, i]
       num.of.dbirds <- vapply(k, function(x) rmultinom(1L, size = trail[x], prob = disp_prob_L[[i]][x, ]), numeric(n_cells))
 
       #calculate V due to dispersal. We assume the fraction of time budget spent on foraging of a day is the fraction that a bird spends time in the neighboring cells
       V_disp_A[, j+1, i]  <-  foraging[[i]]*eta[[i]]*apply(num.of.dbirds,1,sum)
     }#loop for 5 bird species
+    
     #Sum up all V_disp_A shedded by 5 species to obtain Disp_V
     Disp_V <- V_disp_A[,,1]+V_disp_A[,,2]+V_disp_A[,,3]+V_disp_A[,,4]+V_disp_A[,,5]
 
