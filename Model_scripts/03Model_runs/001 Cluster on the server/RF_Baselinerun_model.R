@@ -23,7 +23,7 @@ if(cores > 1L){
   }else{
     cl <- makeCluster(detectCores()-1)
     clusterEvalQ(cl, {
-      library(DanHPAIwildModel)
+      library(DanHPAIwild)
     })
     clusterExport(cl, varlist = c("DanHPAIwildModel", "passur", "V_M", "ID50", "S_list_A", "dD_list_A", "V_disp_A", "disp_prob_L", "gamma", "Rec_list_A", "dRec_list_A", "mf", "theta_A_list", "sigma", "I_list_A", "epsilon", "eta", "mu", "D_list_A", "prob_A", "N_Env", "contact", "xi", "foraging"))
   }

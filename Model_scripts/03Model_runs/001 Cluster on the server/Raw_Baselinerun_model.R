@@ -5,11 +5,14 @@ library("pbapply")
 library("dplyr")
 pboptions(type="timer")
 
-# setwd(".../Data/DanHPAIwild params/")
-# 
-stopifnot(file.exists("DanHPAIwild parameters_Raw.RData"))
-# 
-load("DanHPAIwild parameters_Raw.RData")
+# setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+
+stopifnot(file.exists("Data/DanHPAIwild parameters_Raw.RData"))
+
+load("Data/DanHPAIwild parameters_Raw.RData")
+N_Env <- N_Env/10^9
+ID50 <- lapply(ID50, function(x) x*10)
+sigma <- sigma
 
 iters <- 400
 cores <- 100L
@@ -20,7 +23,7 @@ if(cores > 1L){
   }else{
     cl <- makeCluster(detectCores()-1)
     clusterEvalQ(cl, {
-      library(DanHPAIwildModel)
+      library(DanHPAIwild)
     })
     clusterExport(cl, varlist = c("DanHPAIwildModel", "passur", "V_M", "ID50", "S_list_A", "dD_list_A", "V_disp_A", "disp_prob_L", "gamma", "Rec_list_A", "dRec_list_A", "mf", "theta_A_list", "sigma", "I_list_A", "epsilon", "eta", "mu", "D_list_A", "prob_A", "N_Env", "contact", "xi", "foraging"))
   }
@@ -44,7 +47,7 @@ if(cores > 1L){
 }
 
 session <- sessionInfo()
-save(results, session, file = "Raw_Baseline_outputs.rda")
+save(results, session, file = "Raw_Baseline_output.rda")
 
 Sys.time()
 session
