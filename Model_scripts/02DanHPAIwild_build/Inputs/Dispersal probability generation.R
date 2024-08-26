@@ -1,4 +1,4 @@
-Weibull_param <- readRDS("Data/DanHPAIwild params/Dispersal params/Fandos et al. Weibull params.rds")
+Weibull_param <- readRDS("Data/Fandos et al. Weibull params.rds")
 # --- built five Weibull distributions for 5 species ---
 Weibull_param_data <-
   Weibull_param %>%
@@ -19,8 +19,8 @@ Disp_kernel_list <- list(WS=Disp_kernel(Weibull_param$mean_parameter1[5], Weibul
 
 #3. -------outside of the loop, calculate the disp_prob
 # using dweibull to integrate and obtain dis_prob for i_th species of k_th cell at j+1_th time step
-iden_point_list <- readRDS("Data/DanHPAIwild params/Dispersal params/cell identification_each species_with German cells.rds")
-dist_point <- readRDS("Data/DanHPAIwild params/Dispersal params/Pairwise distance (dis to the same cell is 5 instead of 0).rds")
+iden_point_list <- readRDS("Data/cell identification_each species_with German cells.rds")
+dist_point <- readRDS("Data/Pairwise distance (dis to the same cell is 5 instead of 0).rds")
 speciesi <- c("WS","BG","MS","GG","M")
 
 disp_prob <- iden_point_list
