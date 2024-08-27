@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 # Load data (incl. birds changed number, bird dispersal probability, neccessary function)
 compartment_sf <- readRDS("Data/compartment_sf.rds") # SIR compartments for 5 species
@@ -12,7 +12,7 @@ CLC <- read.csv("Data/DKLine1kmCLC proportions.csv")
 xi <- CLC$Water.bodies+CLC$Wetlands
 
 #load disp_prob 
-source("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/02DanHPAIwild_build/Inputs/Dispersal probability generation.R")
+source(".../DanHPAIwild/Model_scripts/02DanHPAIwild_build/Inputs/Dispersal probability generation.R")
 prob <- lapply(compartment_sf, function(x) x$S)
 
 # Data frame to record simulated numbers

@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 DKmapsf <- readRDS("Data/Shapefiles/DKmapsf.rds")#grid
 

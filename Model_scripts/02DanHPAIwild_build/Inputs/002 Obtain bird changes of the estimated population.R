@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 #read the shape file
 pixelnumber <- read.csv("Data/raster in kilometer.csv") %>% 
@@ -6,7 +6,7 @@ pixelnumber <- read.csv("Data/raster in kilometer.csv") %>%
 pixel.sf <- st_as_sf(pixelnumber, coords = c("x", "y"))
 
 #read raw bird counts
-RF_list <- readRDS("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data/missForest_RFdata.imputed_full_list.rda")
+RF_list <- readRDS(".../DanHPAIwild/Data/missForest_RFdata.imputed_full_list.rda")
 
 #combine the list and the sf
 RF_list_wide_sf <- list()

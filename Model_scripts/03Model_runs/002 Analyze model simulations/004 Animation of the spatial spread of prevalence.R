@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 DKmapsf <- readRDS(file = "Data/Shapefiles/DKmapsf.rds")
 
@@ -34,7 +34,7 @@ q95_Prevalence <- apply(Prevalence, c(1, 2), quantile, probs = 0.95)
 
 
 
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 Sphelp <- read.csv("Data/Data for output analysis/DKmapsf_ID corrsponds to KN10kmDK.csv")
 DKmapsf <- readRDS(file = "Data/Shapefiles/DKmapsf.rds")
 sf_DK_Region <- read_sf("Data/Shapefiles/DK-geographical-regions/SHAPEFILE-DK", layer = "REGION")
@@ -62,4 +62,4 @@ q95_Prevalence <- lapply(c(2:105), function(w) {
     tm_layout(frame = F, title = paste0("Epi week ", w-1), title.size = 0.6)
 })
 
-tmap_animation(q95_Prevalence, filename = "H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/Prevalence_changes.mp4", width = 3000, height = 2000, dpi=300, delay = 50)
+tmap_animation(q95_Prevalence, filename = ".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/Prevalence_changes.mp4", width = 3000, height = 2000, dpi=300, delay = 50)

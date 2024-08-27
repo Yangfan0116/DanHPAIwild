@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 
 load("Model_scripts/03Model_runs/003 Simulation outputs/Estimated_Baseline_output.rda")
@@ -31,7 +31,7 @@ q5_Prevalence <- apply(Prevalence, c(1, 2), quantile, probs = 0.05)
 q95_Prevalence <- apply(Prevalence, c(1, 2), quantile, probs = 0.95)
 
 #median prevalence
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 Sphelp <- read.csv("Data/Data for output analysis/DKmapsf_ID corrsponds to KN10kmDK.csv")
 DKmapsf <- readRDS(file = "Data/Shapefiles/DKmapsf.rds")
 sf_DK_Region <- read_sf("Data/Shapefiles/DK-geographical-regions/SHAPEFILE-DK", layer = "REGION")
@@ -202,5 +202,5 @@ P_simualtion <- plot_grid(plot54 +
 Tmp <- plot_grid(P_simualtion, surveildet, ncol=2, labels = c("", "E. Surveillance detections in 2020/21"))
 plot_grid(Tmp, legend1, ncol = 1, rel_heights = c(1, .2))
 
-ggsave("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/Figure2_Q95_RF.png", width = 12, height = 8, dpi = 300)
+ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/Figure2_Q95_RF.png", width = 12, height = 8, dpi = 300)
 

@@ -1,5 +1,5 @@
 #Obtain the variable B_{c,w}: compensational volunteers’ observations from DOFbasen data
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 DKmapsf <- readRDS("Data/Shapefiles/DKmapsf.rds")
 
@@ -10,7 +10,7 @@ files <- files[match(desired_order, basename(files))]
 file_names <- c("WS", "BG", "MS", "GG", "M")
 
 #load DOF data of 5 species per day in 2016-2021
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data")
+setwd(".../DanHPAIwild/Data")
 DOF_list <- lapply(files, function(file) read.csv(file, sep = ";"))
 
 #Give the simulation time step for each observation
@@ -38,6 +38,6 @@ for(sp in seq_along(1:5)){
   DOFaggweek[[sp]] <- left_join(DOF_list_agg_week[[sp]], a, by='time')
   DOFaggweek[[sp]] <- left_join(df_struc, DOFaggweek[[sp]], by=c("KN10kmDK", "time"))
   
-  write.csv(DOFaggweek[[sp]], file = paste0("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data/", file_names[sp], "Predictor DOF column (590cells).csv"))
+  write.csv(DOFaggweek[[sp]], file = paste0(".../DanHPAIwild/Data/", file_names[sp], "Predictor DOF column (590cells).csv"))
 }
 

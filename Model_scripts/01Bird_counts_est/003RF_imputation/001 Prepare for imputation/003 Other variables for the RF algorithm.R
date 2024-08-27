@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 DKmapsf <- readRDS("Data/Shapefiles/DKmapsf.rds")#grid
 DK <- read_sf("Data/Shapefiles/DK_shapefile/DK_outline.shp")#map outline 
@@ -12,7 +12,7 @@ setwd("Data")
 Truezeros_sp <- lapply(files, function(file) read.csv(file, sep = ","))
 
 #V2.mean temperature per cell per week
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 Meantemp <- read.csv("Data/mean temperature 609cells in study period.csv")
 Meantemp$isoyear <- as.integer(Meantemp$isoyear)
 Meantemp$isoweek <- as.integer(Meantemp$isoweek)
@@ -25,13 +25,13 @@ files <- list.files("Data", pattern = "\\.csv$")
 desired_order <- c("WSPredictor DOF column (590cells).csv", "BGPredictor DOF column (590cells).csv", "MSPredictor DOF column (590cells).csv", "GGPredictor DOF column (590cells).csv", "MPredictor DOF column (590cells).csv")
 files <- files[match(desired_order, basename(files))]
 #read DOF data of 5 species per day in 2016-2021
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data")
+setwd(".../DanHPAIwild/Data")
 column.DOF_list <- lapply(files, function(file) read.csv(file))
 #check true zeros
-files <- list.files("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data" , pattern = "full_idenTrue0.csv$")
+files <- list.files(".../DanHPAIwild/Data" , pattern = "full_idenTrue0.csv$")
 desired_order <- c("WSfull_idenTrue0.csv", "BGfull_idenTrue0.csv", "MSfull_idenTrue0.csv", "GGfull_idenTrue0.csv", "Mfull_idenTrue0.csv")
 files <- files[match(desired_order, basename(files))]
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data")
+setwd(".../DanHPAIwild/Data")
 Truezeros_sp <- lapply(files, function(file) read.csv(file, sep = ","))
 
 Compen_dof <- list()
@@ -40,7 +40,7 @@ for(sp in c(1:5)){
 }
 
 #4. Proportions of land cover types
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 land.cover <- read.csv("Data/DKLine1kmCLC proportions.csv")
 
 #5. coastline length
@@ -81,7 +81,7 @@ for(sp in seq_along(1:5)){
     select(KN10kmDK, time, counts, Value, DOF.max.count, coast_len, Artificial.surfaces, Agricultural.areas, Forest.and.semi.natural.areas, Wetlands, Water.bodies)
   Misdf[[sp]]$KN10kmDK <- as.factor(Misdf[[sp]]$KN10kmDK)
   Misdf[[sp]]$time<-as.factor(Misdf[[sp]]$time)
-  write.csv(Misdf[[sp]], file=paste0("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data", file_names[[sp]], "RFdfwithtruezerofull.csv"))
+  write.csv(Misdf[[sp]], file=paste0(".../DanHPAIwild/Data", file_names[[sp]], "RFdfwithtruezerofull.csv"))
 }
 
 

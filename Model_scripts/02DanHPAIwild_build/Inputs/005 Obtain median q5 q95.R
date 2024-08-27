@@ -1,5 +1,5 @@
 # Calculate the final bird abundance of the raw population 
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 Total_bird_fiveyears <- readRDS("Data/list of birdcount_A_raw_2ConseYear.rds")
 
 calculate_sum <- function(array_list) {
@@ -24,7 +24,7 @@ save(median_Total_bird, q5_Total_bird, q95_Total_bird, file = "Data/M595_raw_Tot
 
 
 # Calculate the final bird abundance of the estimated population 
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 Total_bird_fiveyears <- readRDS("Data/list of birdcount_A_estimated_2ConseYear.rds")
 
 calculate_sum <- function(array_list) {

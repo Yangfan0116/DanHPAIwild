@@ -1,6 +1,6 @@
 Package: DanHPAIwild
 Type: Package
-Title: Spatiotemporal simulation of HPAI transmission in wild bird populations in Denmark
+Title: Spatiotemporal simulation of HPAIV transmission in wild bird populations in Denmark
 Version: 0.1.0
 Date: 2023-11-07
 Author: Yangfan Liu
@@ -9,7 +9,7 @@ Description: This model was developed during the PhD work of Yangfan Liu, under 
     and Anette Elle Boklund of the University of Copenhagen. This folder contains three subfolders namely Data, Model_scripts, and R; 1. The 
     Data folder includes the model inputs and parameters as well as assistant shapefiles and required packages, 2. The Model_scripts 
     folder performs the prediction of bird abundance and preparation of the main HPAI transmission model, and the visulization and quantification of simulated
-    outputs. 3. The R folder contains the main model scripts. Moreover, users can perform simulations with the provided model inputs or their own inputs, such as the updated Danish 
+    outputs. 3. The R folder contains the core model scripts. Moreover, users can perform simulations with the provided model inputs or their own inputs, such as the updated Danish 
     wild bird abundance.
 License: GPL-3
 Encoding: UTF-8

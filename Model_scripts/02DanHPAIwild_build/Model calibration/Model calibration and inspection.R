@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 load("Data/Core data/DanHPAIwild parameters_Raw.RData")
 remotes::install_github("Yangfan0116/DanHPAIwild")
@@ -84,7 +84,7 @@ ggplot(data_long, aes(x = id, y = I, color = par_combo, group = par_combo)) +
   theme(legend.position = "none")+
   annotate(geom='point', x=seq(0, 51),y=passur$HPAIcases[-1]*1000, color="red4", size=0.8)
 
-ggsave("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/10iter_I using 64 par_combo.png", width = 50, height = 35, units = "cm")
+ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/10iter_I using 64 par_combo.png", width = 50, height = 35, units = "cm")
 
 #2. the difference between simulated and real weekly deaths at peak when assuming a 0.2 percent detection effort 
 
@@ -112,7 +112,7 @@ sigma <- sapply(sigma_list_vector, mean)
 dD_list <- lapply(lapply(dD_list, `[[`, 1), function(x) max(x))
 combos3 <- expand.grid(N_Env = N_Env, sigma = sigma, ID50 = ID50)
 combos3$Results <- unlist(dD_list)
-write.csv(combos3, "H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/02DanHPAIwild_build/Model calibration/10iters_Max_dD (64 para sets).csv")
+write.csv(combos3, ".../DanHPAIwild/Model_scripts/02DanHPAIwild_build/Model calibration/10iters_Max_dD (64 para sets).csv")
 
 
 breaks <- c(0, 51/12, 2*51/12, 3*51/12, 4*51/12, 5*51/12, 6*51/12, 7*51/12, 8*51/12, 9*51/12, 10*51/12, 11*51/12)
@@ -128,7 +128,7 @@ ggplot(data_long, aes(x = id, y = dD, color = par_combo, group = par_combo)) +
   scale_x_continuous(expand = c(0, 0), breaks = breaks, labels = labels) +
   theme(legend.position = "none")+
   annotate(geom='point', x=seq(0, 51),y=passur$HPAIcases[-1]*500, color="red4", size=0.8)
-ggsave("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/10iter_dD using 64 par_combo.png", width = 50, height = 35, units = "cm")
+ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/10iter_dD using 64 par_combo.png", width = 50, height = 35, units = "cm")
 
 library(plotly)
 

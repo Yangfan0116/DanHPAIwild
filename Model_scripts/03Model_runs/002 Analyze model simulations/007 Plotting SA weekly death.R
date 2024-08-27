@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 load("Model_scripts/03Model_runs/003 Simulation outputs/Estimated_sa_list.rda")
 
@@ -83,7 +83,7 @@ ggplot(combined_dD %>% filter(sa!=8), aes(x = Time, y = median, group=sa, color=
   theme(legend.position = "none")+
   theme(axis.text.y.right = element_text(size=10), axis.text.y.left = element_text(size=10))
 
-ggsave("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/SA facet plot.png", width = 12, height = 5, dpi = 300)
+ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/SA facet plot.png", width = 12, height = 5, dpi = 300)
 
 #calculate reduction level from Oct to April
 three <- combined_dD %>% filter(sa==3)

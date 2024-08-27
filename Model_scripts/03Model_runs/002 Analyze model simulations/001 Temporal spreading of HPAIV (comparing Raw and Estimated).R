@@ -1,8 +1,8 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 passur <- read.csv("Data/passur_species_matrix.csv", sep = ";") %>% mutate(HPAIcases=WS+BG+MS+GG+M) %>% select(time, HPAIcases)
 
-load("Model_scripts/03Model_runs/003 Simulation outputs/Raw_Baseline_outputs.rda")
+load("Model_scripts/03Model_runs/003 Simulation outputs/Raw_Baseline_output.rda")
 
 calculate_metrics <- function(results, type) {
   m <- matrix(rep(0, 105*614), nrow=614)
@@ -216,4 +216,4 @@ plot_grid(Raw_p1,
           Raw_p3 + theme(axis.title.y.right=element_blank(), axis.text.y.right=element_blank()), 
           RF_p3 + theme(axis.title.y.left=element_blank(), axis.text.y.left=element_blank()), 
           labels = c("A", "D", "B", "E", "C", "F"), ncol = 2, align = "hv")
-ggsave("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/Figure 1.png", width = 60, height = 30, unit = "cm", dpi = 300)
+ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/Figure 1.png", width = 60, height = 30, unit = "cm", dpi = 300)

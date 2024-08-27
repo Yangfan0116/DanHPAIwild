@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 DKmapsf <- readRDS("Data/Shapefiles/DKmapsf.rds")
 
@@ -126,7 +126,7 @@ list_of_datasets <- list("WS" = fulldf_WS_agg_grid,
                          "MS" = fulldf_MS_agg_grid, 
                          "GG" = fulldf_GG_agg_grid, 
                          "M" = fulldf_M_agg_grid)
-write.xlsx(list_of_datasets, file = "H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data/5spe_NOVANA_614cells.xlsx")
+write.xlsx(list_of_datasets, file = ".../DanHPAIwild/Data/5spe_NOVANA_614cells.xlsx")
 
 
 

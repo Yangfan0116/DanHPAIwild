@@ -1,13 +1,13 @@
 Sys.time()
 
-
+library("remotes")
 remotes::install_github("Yangfan0116/DanHPAIwild")
 library("DanHPAIwild")
 library("pbapply")
 library("dplyr")
 pboptions(type="timer")
 
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")#change to your working directory
 
 stopifnot(file.exists("Data/Core data/DanHPAIwild parameters_Estimated.RData"))
 
@@ -49,7 +49,7 @@ if(cores > 1L){
 }
 
 session <- sessionInfo()
-save(results, session, file = "H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/03Model_runs/003 Simulation outputs/Estimated_Baseline_output.rda")
+save(results, session, file = ".../DanHPAIwild/Model_scripts/03Model_runs/003 Simulation outputs/Estimated_Baseline_output.rda")
 
 Sys.time()
 session

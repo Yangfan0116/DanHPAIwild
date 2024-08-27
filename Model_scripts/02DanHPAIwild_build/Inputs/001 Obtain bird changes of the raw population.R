@@ -1,4 +1,4 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 #read the shape file
 pixelnumber <- read.csv("Data/raster in kilometer.csv") %>% 
@@ -6,7 +6,7 @@ pixelnumber <- read.csv("Data/raster in kilometer.csv") %>%
 pixel.sf <- st_as_sf(pixelnumber, coords = c("x", "y"))
 
 #read raw bird counts
-myfiles <- list.files(path = "H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data", pattern = "full_idenTrue0.csv$", full.names = TRUE)
+myfiles <- list.files(path = ".../DanHPAIwild/Data", pattern = "full_idenTrue0.csv$", full.names = TRUE)
 desired_order <- c("WSfull_idenTrue0.csv", "BGfull_idenTrue0.csv", "MSfull_idenTrue0.csv", "GGfull_idenTrue0.csv", "Mfull_idenTrue0.csv")
 myfiles <- myfiles[match(desired_order, basename(myfiles))]
 Truezeroraw_list <- lapply(myfiles, function(file) read.csv(file, sep = ","))

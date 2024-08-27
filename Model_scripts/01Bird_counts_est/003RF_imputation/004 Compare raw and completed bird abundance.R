@@ -1,5 +1,5 @@
 #Obtain the estimated bird abundance 
-missForest_list <- readRDS("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data/missForest_RFdata.imputed_full_list.rda")
+missForest_list <- readRDS("/DanHPAIwild/Data/missForest_RFdata.imputed_full_list.rda")
 glimpse(missForest_list[[1]])
 species_names <- c("WS", "BG", "MS", "GG", "M")
 names(missForest_list) <- species_names
@@ -49,7 +49,7 @@ missForest_firstdf <- firstdf
 #Obtain the raw bird abundance
 #line of number of birds in 2020 week 39 to 2021 week 38
 #read raw bird counts
-myfiles <- list.files(path = "H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data", pattern = "full_idenTrue0.csv$", full.names = TRUE)
+myfiles <- list.files(path = "/DanHPAIwild/Data", pattern = "full_idenTrue0.csv$", full.names = TRUE)
 desired_order <- c("WSfull_idenTrue0.csv", "BGfull_idenTrue0.csv", "MSfull_idenTrue0.csv", "GGfull_idenTrue0.csv", "Mfull_idenTrue0.csv")
 myfiles <- myfiles[match(desired_order, basename(myfiles))]
 Truezeroraw_list <- lapply(myfiles, function(file) read.csv(file, sep = ","))
@@ -173,4 +173,4 @@ Time_series_graphs_com_5
 
 library(cowplot)
 plot_grid(Time_series_graphs_com_1, Time_series_graphs_com_2, Time_series_graphs_com_3, Time_series_graphs_com_4, Time_series_graphs_com_5, ncol=1)
-ggsave("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/missForest_vs_raw_Time_series_graphs.png", width = 12, height = 25, dpi=300)
+ggsave("/DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/missForest_vs_raw_Time_series_graphs.png", width = 12, height = 25, dpi=300)

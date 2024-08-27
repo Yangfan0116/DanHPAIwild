@@ -1,9 +1,9 @@
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild")
+setwd(".../DanHPAIwild")
 source("Data/Required pkgs.R")
 DKmapsf <- readRDS("Data/Shapefiles/DKmapsf.rds")
 
-#load rasterized NOVANA midwinter data
-path <- "Nonpublic data/5spe_NOVANA_614cells.xlsx"
+#load rasterized NOVANA midwinter data, NOVANA data is not publicly available
+# path <- "Nonpublic data/5spe_NOVANA_614cells.xlsx"
 NOVANA_list <- path %>%
   excel_sheets() %>%
   set_names() %>%
@@ -124,7 +124,7 @@ for (sp in seq_along(1:5)){
   DOF_list_weekly_phenology_counts_in_5seasons[[sp]] <- bind_rows(DOF_list.2016_17.weekly[[sp]], DOF_list.2017_18.weekly[[sp]], DOF_list.2018_19.weekly[[sp]], DOF_list.2019_20.weekly[[sp]], DOF_list.2020_21.weekly[[sp]])
 }
 
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data")
+setwd(".../DanHPAIwild/Data")
 file_names <- c("WS_weekly_phenology_counts_in_5seasons", "BG_weekly_phenology_counts_in_5seasons", "MS_weekly_phenology_counts_in_5seasons", "GG_weekly_phenology_counts_in_5seasons", "M_weekly_phenology_counts_in_5seasons")
 for (i in seq_along(DOF_list_weekly_phenology_counts_in_5seasons)) {
   write.csv(DOF_list_weekly_phenology_counts_in_5seasons[[i]], file = paste0(file_names[i], ".csv"), row.names = FALSE)

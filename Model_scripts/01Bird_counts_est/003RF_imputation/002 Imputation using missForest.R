@@ -7,7 +7,7 @@ library("missForest")
 library("doParallel")
 pboptions(type="timer")
 
-setwd("H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data")
+setwd(".../DanHPAIwild/Data")
 
 files <- list.files(pattern = "RFdfwithtruezerofull.csv$")
 desired_order <- c("WSRFdfwithtruezerofull.csv ", "BGRFdfwithtruezerofull.csv ", "MSRFdfwithtruezerofull.csv ", "GGRFdfwithtruezerofull.csv ", "MRFdfwithtruezerofull.csv ")
@@ -30,7 +30,7 @@ for (sp in c(1:5)){
 }}
 
 session <- sessionInfo()
-save(RFdata.imp, file = "H:/All/Backup_documents/KU-PhD_030622/Phd Project/PhD plan/Manuscript 2/Submission/DanHPAIwild/DanHPAIwild/Data/missForest_RFdata.imputed_sp_Y.rda")
+save(RFdata.imp, file = ".../DanHPAIwild/Data/missForest_RFdata.imputed_sp_Y.rda")
 
 Sys.time()
 session
