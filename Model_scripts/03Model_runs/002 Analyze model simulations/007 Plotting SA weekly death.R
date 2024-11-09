@@ -70,20 +70,34 @@ labels <- c("Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"
 
 tmp <- combined_dD %>% filter(sa==8)
 base=tmp$median
-ggplot(combined_dD %>% filter(sa!=8), aes(x = Time, y = median, group=sa, color=factor(sa)))+
+
+combined_dD <- combined_dD %>% mutate(sa=case_when(
+  sa==1 ~ "ID50 1/10-fold",
+  sa==2 ~ "ID50, 10-fold",
+  sa==3 ~ "Conta. rate of D, 0",
+  sa==4 ~ "Conta. rate of D, halved",
+  sa==5 ~ "Peak at Oct.",
+  sa==6 ~ "Peak at Dec.",
+  sa==7 ~ "Peak at Jan.",
+  sa==8 ~ "8"
+))
+
+ggplot(combined_dD %>% filter(sa!="8") %>% mutate(sa=factor(sa, levels = c("ID50 1/10-fold", "ID50, 10-fold", "Peak at Oct.", "Peak at Dec.", "Peak at Jan.", "Conta. rate of D, 0", "Conta. rate of D, halved"))), aes(x = Time, y = median, group=sa, color=sa))+
   # geom_ribbon(aes(ymin = q5, ymax = q95, group=sa, fill=factor(sa)), alpha=0.3)+
   geom_line(linewidth=1)+
   theme_bw()+
-  facet_wrap(~sa, ncol=4, labeller=as_labeller(c("1"="ID50 1/10-fold", "2"="ID50, 10-fold", "3"="Conta. rate of D, 0",  "4"="Conta. rate of D, halved", "5"="Peak at Oct.", "6"="Peak at Dec.", "7"="Peak at Jan.")))+
+  facet_wrap(~sa, ncol=3)+
   annotate(geom='line', x=seq(0, 52),y=base, size=1, alpha=0.6)+
   scale_x_continuous(expand = c(0, 0), breaks = breaks, labels = labels) +
-  scale_y_continuous(labels = scales::comma, breaks = seq(0, 150000, by=25000))+
-  labs(x = "Month", y = "Dead birds per week", color="Sensitivity analysis scenario") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  theme(legend.position = "none")+
-  theme(axis.text.y.right = element_text(size=10), axis.text.y.left = element_text(size=10))
+  scale_y_continuous(labels = scales::comma, breaks = seq(0, 60000, by=20000))+
+  labs(x = "Month", y = "Dead birds per week", color=str_wrap("Scenarios (baseline shown in grey)", 10)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size=12),
+        axis.text.y = element_text(size=12),
+        strip.background = element_blank(),
+        strip.text.x = element_blank()
+  )
 
-ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/SA facet plot.png", width = 12, height = 5, dpi = 300)
+ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyze model simulations/Figures/F7.png", width = 10, height = 5, dpi = 300)
 
 #calculate reduction level from Oct to April
 three <- combined_dD %>% filter(sa==3)

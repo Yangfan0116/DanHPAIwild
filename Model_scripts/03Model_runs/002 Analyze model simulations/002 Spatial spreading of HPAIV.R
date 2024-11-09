@@ -168,7 +168,7 @@ tmp.agg_UTM <- st_as_sf(Detection_raw, coords = c("X", "Y"), crs = 32632)
 tmp.agg_UTM <- st_transform(tmp.agg_UTM, "EPSG:32632")
 tmp.agg_UTM$HPAIcases <- as.factor(tmp.agg_UTM$HPAIcases)
 tmp.agg_UTM$Week <- as.numeric(tmp.agg_UTM$Week)
-tmp.agg_UTM <- tmp.agg_UTM %>% mutate(Week=Week-1) %>% mutate(Quater=case_when(
+tmp.agg_UTM <- tmp.agg_UTM %>% mutate(Week=Week-1) %>% mutate(Quarter=case_when(
   Week >= 0 & Week < 3*51/12 ~ "Q1",
   Week >= 3*51/12 & Week < 6*51/12 ~ "Q2",
   Week >= 6*51/12 & Week < 9*51/12 ~ "Q3",
@@ -177,30 +177,79 @@ tmp.agg_UTM <- tmp.agg_UTM %>% mutate(Week=Week-1) %>% mutate(Quater=case_when(
 
 surveildet <- ggplot() +
   geom_sf(data = sf_DK_Region_UTM) +
-  geom_sf(data = tmp.agg_UTM %>% filter(HPAIcases==1), aes(color=Quater), alpha=0.8) +
+  geom_sf(data = tmp.agg_UTM %>% filter(HPAIcases==1), aes(color=Quarter), alpha=0.8) +
   geom_sf_text(data = Regions, aes(label = name_wrapped), color="black", size=3)+
   ggthemes::theme_map() +
-  scale_color_discrete(name = "Quater")+
+  scale_color_discrete(name = "Quarter")+
   theme(plot.title = element_text(size = 15, hjust = 0.1),
         legend.position = c("right"))
 # surveildet
 
 library(cowplot)
-legend1 <- get_legend(plot54)
+surveildet_Q1 <- ggplot() +
+  geom_sf(data = sf_DK_Region_UTM) +
+  geom_sf(data = tmp.agg_UTM %>% filter(HPAIcases==1, Quarter=="Q1"), aes(color="red"), alpha=1) +
+  geom_sf_text(data = Regions, aes(label = name_wrapped), color="black", size=3)+
+  ggthemes::theme_map() +
+  scale_color_discrete(name = "Quarter")+
+  theme(plot.title = element_text(size = 15, hjust = 0.1),
+        legend.position = "none")
+surveildet_Q1
 
-P_simualtion <- plot_grid(plot54 +
-            theme(legend.position = "none") + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) 
-          , plot67 + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) +
-            theme(legend.position = "none")
-          , plot80 + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) +
-            theme(legend.position = "none")
-          , plot93 + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) +
-            theme(legend.position = "none"), 
-          nrow=2,
-          labels = c("A. Oct.(Q1)", "B. Jan.(Q2)", "C. Apr.(Q3)", "D. Jul.(Q4)"))
+Q1 <- plot_grid(plot54 +
+                  theme(legend.position = "none") + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) 
+                , surveildet_Q1)
 
-Tmp <- plot_grid(P_simualtion, surveildet, ncol=2, labels = c("", "E. Surveillance detections in 2020/21"))
-plot_grid(Tmp, legend1, ncol = 1, rel_heights = c(1, .2))
 
-ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/Figure2_Q95_RF.png", width = 12, height = 8, dpi = 300)
+surveildet_Q2 <- ggplot() +
+  geom_sf(data = sf_DK_Region_UTM) +
+  geom_sf(data = tmp.agg_UTM %>% filter(HPAIcases==1, Quarter=="Q2"), aes(color="red"), alpha=1) +
+  geom_sf_text(data = Regions, aes(label = name_wrapped), color="black", size=3)+
+  ggthemes::theme_map() +
+  scale_color_discrete(name = "Quarter")+
+  theme(plot.title = element_text(size = 15, hjust = 0.1),
+        legend.position = "none")
+surveildet_Q2
 
+Q2 <- plot_grid(plot67 +
+                  theme(legend.position = "none") + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) 
+                , surveildet_Q2)
+
+surveildet_Q3 <- ggplot() +
+  geom_sf(data = sf_DK_Region_UTM) +
+  geom_sf(data = tmp.agg_UTM %>% filter(HPAIcases==1, Quarter=="Q3"), aes(color="red"), alpha=1) +
+  geom_sf_text(data = Regions, aes(label = name_wrapped), color="black", size=3)+
+  ggthemes::theme_map() +
+  scale_color_discrete(name = "Quarter")+
+  theme(plot.title = element_text(size = 15, hjust = 0.1),
+        legend.position = "none")
+surveildet_Q3
+
+Q3 <- plot_grid(plot80 +
+                  theme(legend.position = "none") + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) 
+                , surveildet_Q3)
+
+surveildet_Q4 <- ggplot() +
+  geom_sf(data = sf_DK_Region_UTM) +
+  geom_sf(data = tmp.agg_UTM %>% filter(HPAIcases==1, Quarter=="Q4"), aes(color="red"), alpha=1) +
+  geom_sf_text(data = Regions, aes(label = name_wrapped), color="black", size=3)+
+  ggthemes::theme_map() +
+  scale_color_discrete(name = "Quarter")+
+  theme(plot.title = element_text(size = 15, hjust = 0.1),
+        legend.position = "none")
+surveildet_Q4
+
+Q4 <- plot_grid(plot93 +
+                  theme(legend.position = "none") + theme(plot.margin = unit(c(0, 0, 0, 0), "cm")) 
+                , surveildet_Q4)
+
+
+Comparisons <- plot_grid(
+  plot_grid(Q1 + theme(plot.background = element_rect(color = "black")), labels = c("A. Oct.(Q1)")) ,
+  plot_grid(Q2 + theme(plot.background = element_rect(color = "black")), labels = c("B. Jan.(Q2)")),
+  plot_grid(Q3 + theme(plot.background = element_rect(color = "black")), labels = c("C. Apr.(Q3)")),
+  plot_grid(Q4 + theme(plot.background = element_rect(color = "black")), labels = c("D. Jul.(Q4)")), 
+  ncol = 1) 
+Comparisons
+
+ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/F5.jpg", width = 10, height = 16, dpi = 300)

@@ -162,58 +162,72 @@ RF_df_P3 <- RF_df %>% filter(Compartment %in% c("dD", "dR"))
 breaks <- c(0, 51/12, 2*51/12, 3*51/12, 4*51/12, 5*51/12, 6*51/12, 7*51/12, 8*51/12, 9*51/12, 10*51/12, 11*51/12)
 labels <- c("Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep")
 plot_P1 <- function(df_P1)
-  {ggplot(df_P1, aes(x = Time, y = median)) +
+{ggplot(df_P1, aes(x = Time, y = median)) +
     facet_wrap(~factor(Compartment, levels=c('S', "D", 'Total')), labeller = as_labeller(c("S" = "1. Susceptible", "D" = "2. Dead", "Total" = "3. Total"))) +
-    geom_point(size=1) +
-    geom_line(linewidth=1) +
+    geom_point(size=0.6) +
+    geom_line(linewidth=0.6) +
     geom_ribbon(data = df_P1, aes(ymin = q5, ymax = q95, group = Compartment), alpha = 0.3) +
-    scale_y_continuous(limits = c(0, 811148.9), breaks = seq(0, 811148.9, by = 100000), labels = scales::comma) +
+    scale_y_continuous(limits = c(0, 811148.9), breaks = seq(0, 811148.9, by = 200000), labels = scales::comma) +
     theme_hc()+
     labs(y="Number of birds")+
     scale_x_continuous(expand = c(0, 0), breaks = breaks, labels = labels) +
     labs(x = "Month") +
-    theme(legend.position = "none")}
+    theme(legend.position = "none",
+          axis.text.x = element_text(angle = 45, hjust = 1, size=7),
+          axis.text.y = element_text(size=7),
+          axis.title.x = element_text(size=8),
+          axis.title.y = element_text(size=8))
+}
 Raw_p1 <- plot_P1(Raw_df_P1)
 RF_p1 <- plot_P1(RF_df_P1)
 
 plot_P2 <- function(df_P2)
 {ggplot(df_P2, aes(x = Time, y = median)) +
     facet_wrap(~factor(Compartment, levels=c('I', 'R')), labeller = as_labeller(c("I" = "4. Infectious", "R" = "5. Recovered"))) +
-    geom_point(size=1) +
-    geom_line(linewidth=1) +
+    geom_point(size=0.6) +
+    geom_line(linewidth=0.6) +
     geom_ribbon(data = df_P2, aes(ymin = q5, ymax = q95, group = Compartment), alpha = 0.3) +
-    scale_y_continuous(limits = c(0, 98281.6), breaks = seq(0, 98281.6, by = 10000), labels = scales::comma) +
+    scale_y_continuous(limits = c(0, 98281.6), breaks = seq(0, 98281.6, by = 20000), labels = scales::comma) +
     theme_hc()+
     labs(y="Number of birds")+
     scale_x_continuous(expand = c(0, 0), breaks = breaks, labels = labels) +
     labs(x = "Month") +
-    theme(legend.position = "none")}
+    theme(legend.position = "none",
+          axis.text.x = element_text(angle = 45, hjust = 1, size=7),
+          axis.text.y = element_text(size=7),
+          axis.title.x = element_text(size=8),
+          axis.title.y = element_text(size=8))
+}
 Raw_p2 <- plot_P2(Raw_df_P2)
 RF_p2 <- plot_P2(RF_df_P2)
 
 plot_P3 <- function(df_P3)
-  {ggplot(df_P3, aes(x = Time, y = median)) +
+{ggplot(df_P3, aes(x = Time, y = median)) +
     facet_wrap(~factor(Compartment, levels=c('dD', 'dR')), labeller = as_labeller(c("dD" = "6. Dead/week", "dR" = "7. Recovered/week"))) +
-    geom_point(size=1) +
-    geom_line(linewidth=1) +
+    geom_point(size=0.6) +
+    geom_line(linewidth=0.6) +
     geom_ribbon(data = df_P3, aes(ymin = q5, ymax = q95, group = Compartment), alpha = 0.3) +
-    scale_y_continuous(limits = c(0, 22200), breaks = seq(0, 22200, by = 2000), labels = scales::comma, sec.axis = sec_axis(trans = ~./300,  name = 'Number of birds (surveillance)', labels = scales::comma)) +
+    scale_y_continuous(limits = c(0, 22200), breaks = seq(0, 22200, by = 4000), labels = scales::comma, sec.axis = sec_axis(trans = ~./300,  name = 'Number of birds (surveillance)', labels = scales::comma)) +
+    theme_hc()+
     labs(y="Number of birds")+
     scale_x_continuous(expand = c(0, 0), breaks = breaks, labels = labels) +
     labs(x = "Month") +
     theme(legend.position = "none", 
-          axis.text.y.right = element_text(color = "red4"))+
+          axis.text.y.right = element_text(color = "red4", size=7),
+          axis.text.x = element_text(angle = 45, hjust = 1, size=7),
+          axis.text.y.left = element_text(size=7),
+          axis.title.x = element_text(size=8),
+          axis.title.y = element_text(size=8))+
     geom_point(data = data.frame(median = passur$HPAIcases[-1]*300, Time = seq(0, 51), Compartment = "dD"), colour="red4")}
-  
+
 Raw_p3 <- plot_P3(Raw_df_P3)
 RF_p3 <- plot_P3(RF_df_P3)
 
-library(cowplot)
 plot_grid(Raw_p1, 
-          RF_p1 + theme(axis.title.y=element_blank(), axis.text.y=element_blank()), 
-          Raw_p2 + theme(axis.title.y.right=element_blank(), axis.text.y.right=element_blank()), 
-          RF_p2 + theme(axis.title.y.left=element_blank(), axis.text.y.left=element_blank()), 
-          Raw_p3 + theme(axis.title.y.right=element_blank(), axis.text.y.right=element_blank()), 
-          RF_p3 + theme(axis.title.y.left=element_blank(), axis.text.y.left=element_blank()), 
-          labels = c("A", "D", "B", "E", "C", "F"), ncol = 2, align = "hv")
-ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/Figure 1.png", width = 60, height = 30, unit = "cm", dpi = 300)
+          RF_p1 + theme(axis.title.x=element_blank()),
+          Raw_p2, 
+          RF_p2 + theme(axis.title.x=element_blank()), 
+          Raw_p3 + theme(axis.title.x=element_blank(), axis.title.y.right=element_blank()), 
+          RF_p3 + theme(axis.title.x=element_blank(), axis.title.y.right=element_blank()), 
+          labels = c("Raw pop.", "Est pop.", "Raw pop.", "Est pop.", "Raw pop.", "Est pop."), label_size=8, ncol = 1, align = "hv")
+ggsave(".../DanHPAIwild/Model_scripts/03Model_runs/002 Analyses on model simulations/Figures/F4.png", width = 16, height = 20, unit = "cm", dpi = 300)
